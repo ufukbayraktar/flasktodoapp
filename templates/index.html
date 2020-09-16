@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+
+    <title>Todo App</title>
+</head>
+<body>
+
+    <div style="margin-top: 100px;" class="container-fluid">
+        <h3>Todo List</h3>
+        <hr>
+
+        <form action="/add" method="post" >
+        <div class="form-group">
+            <label for="formGroupExampleInput">Todo Başlık</label>
+            <input type="text" class="form-control" name="title" id="formGroupExampleInput" placeholder="Todo Giriniz"><br>
+            <button type="submit" class="btn btn-danger">Ekle</button>       
+        </div>
+        <hr>
+
+        </form>
+
+        {% if todos == [] %}
+            <div class="alert alert-warning" role="alert">
+                This is a warning alert—check it out!
+            </div>
+        {% else %}
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Todo Başlık </th>
+      <th scope="col">Todo Durum</th>
+      <th scope="col">Durum Güncelle</th>
+      <th scope="col">Todo Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for todo in todos %}
+  	<tr>
+      <th scope="row">{{todo.id}}</th>
+      <td>{{todo.title}}</td>
+      {% if todo.complete==False %}
+      <td>Tamamlanmadı</td>
+      {% else %}
+      <td>Tamamlandı</td>
+      {% endif %}
+      <td><a href="/complete/{{todo.id}}" class="btn btn-danger">Durum Değiştir</a></td>
+      <td><a href="/delete/{{todo.id}}" class="btn btn-danger">Sil</a></td>
+      <form>
+    </tr>
+  {% endfor %}  
+  </tbody>
+</table>    
+        
+        {% endif %}
+        
+    </div>
+
+    
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+</body>
+</html>
